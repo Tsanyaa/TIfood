@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TIFood - Kantin & Booth Kampus</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              orange: '#FF6535',
+              'orange-hover': '#e55527',
+              dark: '#1E293B',
+              bg: '#FAF9F6',
+              green: '#10B981',
+              'green-hover': '#059669',
+              yellow: '#F59E0B',
+              red: '#EF4444'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #FAF9F6;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col">
+
+  <!-- NAVBAR -->
+  <header class="bg-white border-b border-slate-100 sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <!-- Logo -->
+      <div class="flex items-center space-x-3 cursor-pointer" onclick="navigateTo('beranda')">
+        <div class="w-10 h-10 rounded-full bg-brand-orange text-white flex items-center justify-center font-bold text-xl shadow-md">
+          T
+        </div>
+        <span class="text-2xl font-extrabold tracking-tight text-slate-900">TIFood</span>
+      </div>
+
+      <!-- Navigation Links (Center) -->
+      <nav class="hidden md:flex items-center space-x-2 bg-slate-50 p-1.5 rounded-full border border-slate-200/60" id="main-nav">
+        <button onclick="navigateTo('beranda')" id="nav-beranda" class="px-5 py-2 rounded-full text-sm font-semibold transition-all shadow-sm bg-brand-orange/10 text-brand-orange">
+          Beranda
+        </button>
+        <button onclick="navigateTo('katalog')" id="nav-katalog" class="px-5 py-2 rounded-full text-sm font-medium text-slate-600 hover:text-slate-900 transition-all">
+          Katalog Produk
+        </button>
+        <button onclick="navigateTo('login')" id="nav-login" class="px-5 py-2 rounded-full text-sm font-medium text-slate-600 hover:text-slate-900 transition-all">
+          Login
+        </button>
+      </nav>
+
+      <!-- Right Auth Buttons -->
+      <div class="flex items-center space-x-3">
+        <button onclick="navigateTo('login')" class="hidden sm:inline-flex px-5 py-2 rounded-full text-sm font-semibold text-slate-700 hover:bg-slate-100 transition-all border border-slate-200">
+          Login
+        </button>
+        <button onclick="navigateTo('daftar')" class="px-6 py-2 rounded-full text-sm font-semibold text-white bg-brand-orange hover:bg-brand-orange-hover transition-all shadow-sm">
+          Daftar
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <!-- ================= PAGE 1: BERANDA ================= -->
+    <section id="page-beranda" class="space-y-8">
+      <!-- Hero Banner -->
+      <div class="bg-brand-dark rounded-3xl p-8 sm:p-12 text-white relative overflow-hidden shadow-xl">
+        <div class="relative z-10 max-w-2xl space-y-6">
+          <!-- Status Badge -->
+          <div class="flex items-center space-x-3">
+            <span id="hero-status-badge" class="inline-flex items-center space-x-2 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
+              <span id="hero-status-dot" class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span id="hero-status-text">STATUS: BUKA</span>
+            </span>
+            <span id="hero-operating-hours" class="bg-slate-700/60 text-slate-300 px-4 py-1.5 rounded-full text-xs font-medium">
+              08.00–16.00
+            </span>
+          </div>
+
+          <!-- Title -->
+          <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight">
+            Makan Enak,<br>Lebih Mudah<br>Bersama TIFood
+          </h1>
+
+          <!-- Description -->
+          <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-xl">
+            Pantau stok booth kampus secara real-time, lalu hubungi penjaga untuk memesan makanan, minuman, dan ATK.
+          </p>
+
+          <!-- CTA Buttons -->
+          <div class="flex flex-wrap gap-4 pt-2">
+            <button onclick="navigateTo('katalog')" class="px-6 py-3.5 rounded-full text-sm font-semibold border-2 border-white/80 hover:bg-white hover:text-brand-dark transition-all">
+              Lihat Katalog Produk
+            </button>
+            <a href="https://wa.me/628123456789" target="_blank" class="px-6 py-3.5 rounded-full text-sm font-semibold bg-brand-green hover:bg-brand-green-hover text-white transition-all shadow-lg flex items-center space-x-2">
+              <span>Hubungi Penjaga via WhatsApp</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="hidden lg:flex absolute top-1/2 -translate-y-1/2 right-12 w-96 h-96 rounded-full bg-slate-800/80 items-center justify-center border-4 border-slate-700/50 shadow-2xl">
+          <div class="text-9xl transform hover:scale-110 transition-transform cursor-pointer">
+            🍱
+          </div>
+        </div>
+      </div>
+
+      <!-- Tentang Section -->
+      <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-100 shadow-sm space-y-3">
+        <div class="flex items-center space-x-3">
+          <h2 class="text-xl font-extrabold text-slate-900">Tentang TIFood</h2>
+          <span class="bg-orange-100 text-brand-orange text-xs font-bold px-3 py-1 rounded-full">Booth Kampus</span>
+        </div>
+        <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+          TIFood adalah booth kampus yang menyediakan makanan, minuman, dan alat tulis (ATK) bagi mahasiswa, dosen, dan tendik. Cek ketersediaan stok secara real-time sebelum datang, lalu hubungi penjaga melalui WhatsApp.
+        </p>
+      </div>
+
+      <!-- Jadwal Shift Penjaga -->
+      <div class="space-y-4">
+        <h3 class="text-xl font-bold text-slate-900">Jadwal Shift Penjaga</h3>
+        
+        <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="bg-brand-dark text-white text-xs font-bold uppercase tracking-wider">
+                  <th class="py-4 px-6">Hari / Waktu</th>
+                  <th class="py-4 px-6">Nama Penjaga</th>
+                  <th class="py-4 px-6">Shift</th>
+                  <th class="py-4 px-6 text-right">Aksi</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 text-sm">
+                <tr class="hover:bg-slate-50 transition-colors">
+                  <td class="py-4 px-6 font-medium text-slate-800">Senin–Jumat, 08.00–12.00</td>
+                  <td class="py-4 px-6 font-medium text-slate-900">Andi Pratama</td>
+                  <td class="py-4 px-6">
+                    <span class="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-xs font-bold">Pagi</span>
+                  </td>
+                  <td class="py-4 px-6 text-right">
+                    <a href="https://wa.me/628123456789?text=Halo%20Andi,%20saya%20mau%20pesan" target="_blank" class="inline-flex items-center space-x-1 px-4 py-2 rounded-xl text-xs font-semibold bg-brand-green hover:bg-brand-green-hover text-white transition-all shadow-sm">
+                      <span>Hubungi via WhatsApp</span>
+                    </a>
+                  </td>
+                </tr>
+                <tr class="hover:bg-slate-50 transition-colors">
+                  <td class="py-4 px-6 font-medium text-slate-800">Senin–Jumat, 12.00–16.00</td>
+                  <td class="py-4 px-6 font-medium text-slate-900">Siti Rahmawati</td>
+                  <td class="py-4 px-6">
+                    <span class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-xs font-bold">Siang</span>
+                  </td>
+                  <td class="py-4 px-6 text-right">
+                    <a href="https://wa.me/628123456789?text=Halo%20Siti,%20saya%20mau%20pesan" target="_blank" class="inline-flex items-center space-x-1 px-4 py-2 rounded-xl text-xs font-semibold bg-brand-green hover:bg-brand-green-hover text-white transition-all shadow-sm">
+                      <span>Hubungi via WhatsApp</span>
+                    </a>
+                  </td>
+                </tr>
+                <tr class="hover:bg-slate-50 transition-colors">
+                  <td class="py-4 px-6 font-medium text-slate-800">Sabtu, 08.00–12.00</td>
+                  <td class="py-4 px-6 font-medium text-slate-900">Budi Santoso</td>
+                  <td class="py-4 px-6">
+                    <span class="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-xs font-bold">Pagi</span>
+                  </td>
+                  <td class="py-4 px-6 text-right">
+                    <a href="https://wa.me/628123456789?text=Halo%20Budi,%20saya%20mau%20pesan" target="_blank" class="inline-flex items-center space-x-1 px-4 py-2 rounded-xl text-xs font-semibold bg-brand-green hover:bg-brand-green-hover text-white transition-all shadow-sm">
+                      <span>Hubungi via WhatsApp</span>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Action Bar -->
+      <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
+        <button onclick="navigateTo('katalog')" class="px-8 py-3.5 rounded-2xl font-bold text-brand-orange border-2 border-brand-orange hover:bg-brand-orange/10 transition-all">
+          Lihat Katalog Produk
+        </button>
+        <a href="https://wa.me/628123456789" target="_blank" class="px-8 py-3.5 rounded-2xl font-bold bg-brand-green text-white hover:bg-brand-green-hover transition-all shadow-md">
+          Hubungi Penjaga via WhatsApp
+        </a>
+      </div>
+    </section>
+
+    <!-- ================= PAGE 2: KATALOG PRODUK ================= -->
+    <section id="page-katalog" class="hidden space-y-8">
+      <!-- Title Header -->
+      <div class="space-y-1">
+        <h1 class="text-3xl font-extrabold text-slate-900">Katalog Produk</h1>
+        <p class="text-slate-500 text-sm">Temukan makanan, minuman, dan ATK favoritmu di sini.</p>
+      </div>
+
+      <!-- Filter Bar -->
+      <div class="space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+          <!-- Search Bar -->
+          <div class="md:col-span-6 relative">
+            <label class="block text-xs font-bold text-slate-700 mb-1">Pencarian</label>
+            <div class="relative">
+              <input type="text" id="search-input" oninput="renderKatalog()" placeholder="Cari nama produk..." class="w-full pl-10 pr-4 py-3 bg-white rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-orange/20 focus:border-brand-orange transition-all">
+              <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400">🔍</span>
+            </div>
+          </div>
+
+          <!-- Kategori Select -->
+          <div class="md:col-span-3">
+            <label class="block text-xs font-bold text-slate-700 mb-1">Kategori</label>
+            <select id="kategori-select" onchange="renderKatalog()" class="w-full py-3 px-4 bg-white rounded-xl border border-slate-200 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-orange/20 focus:border-brand-orange transition-all">
+              <option value="Semua">Semua (Makanan / Minuman / ATK)</option>
+              <option value="Makanan">Makanan</option>
+              <option value="Minuman">Minuman</option>
+              <option value="ATK">ATK</option>
+            </select>
+          </div>
+
+          <!-- Urutkan Harga Select -->
+          <div class="md:col-span-3">
+            <label class="block text-xs font-bold text-slate-700 mb-1">Urutkan Harga</label>
+            <select id="sort-select" onchange="renderKatalog()" class="w-full py-3 px-4 bg-white rounded-xl border border-slate-200 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-orange/20 focus:border-brand-orange transition-all">
+              <option value="low-high">Termurah–Termahal</option>
+              <option value="high-low">Termahal–Termurah</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Category Pills -->
+        <div class="flex flex-wrap items-center gap-2 pt-2">
+          <button onclick="setCategoryFilter('Semua')" id="pill-Semua" class="px-5 py-2 rounded-xl text-xs font-bold transition-all bg-brand-orange text-white shadow-sm">
+            Semua
+          </button>
+          <button onclick="setCategoryFilter('Makanan')" id="pill-Makanan" class="px-5 py-2 rounded-xl text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition-all">
+            🍜 Makanan
+          </button>
+          <button onclick="setCategoryFilter('Minuman')" id="pill-Minuman" class="px-5 py-2 rounded-xl text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition-all">
+            🧃 Minuman
+          </button>
+          <button onclick="setCategoryFilter('ATK')" id="pill-ATK" class="px-5 py-2 rounded-xl text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition-all">
+            ✏️ ATK
+          </button>
+        </div>
+      </div>
+
+      <!-- Product Grid -->
+      <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Empty State Section -->
+      <div class="mt-12">
+        <div class="text-xs font-bold text-slate-400 mb-3">State: Produk Tidak Ditemukan</div>
+        <div id="empty-state" class="border-2 border-dashed border-slate-200 rounded-3xl p-12 text-center bg-slate-50/50 space-y-3">
+          <div class="text-4xl">🔍</div>
+          <h4 class="text-lg font-extrabold text-slate-800">Produk tidak ditemukan.</h4>
+          <p class="text-slate-500 text-sm">Coba kata kunci atau kategori lain.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PAGE 3: DETAIL PRODUK ================= -->
+    <section id="page-detail" class="hidden space-y-6">
+      <!-- Back Button -->
+      <div>
+        <button onclick="navigateTo('katalog')" class="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-white border border-slate-200 text-xs font-bold text-slate-700 hover:bg-slate-50 transition-all shadow-sm">
+          <span>&lt; Kembali ke Katalog</span>
+        </button>
+      </div>
+
+      <!-- Product Detail Card Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- Image & Thumbnails (Left) -->
+        <div class="lg:col-span-6 bg-white rounded-3xl p-8 border border-slate-100 shadow-sm space-y-6">
+          <div class="w-full h-80 rounded-2xl bg-amber-50/40 border border-amber-100/50 flex items-center justify-center text-9xl">
+            <span id="detail-emoji">🖊️</span>
+          </div>
+
+          <!-- Thumbnails -->
+          <div class="flex items-center space-x-3">
+            <div class="w-16 h-16 rounded-xl border-2 border-brand-orange bg-amber-50/40 flex items-center justify-center text-2xl cursor-pointer">
+              🖊️
+            </div>
+            <div class="w-16 h-16 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-center text-2xl cursor-pointer opacity-70 hover:opacity-100 transition-opacity">
+              ✒️
+            </div>
+            <div class="w-16 h-16 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-center text-2xl cursor-pointer opacity-70 hover:opacity-100 transition-opacity">
+              🖋️
+            </div>
+          </div>
+        </div>
+
+        <!-- Info & Actions (Right) -->
+        <div class="lg:col-span-6 bg-white rounded-3xl p-8 border border-slate-100 shadow-sm space-y-6">
+          <div>
+            <h1 id="detail-title" class="text-3xl font-extrabold text-slate-900">Pulpen Gel Hitam</h1>
+            <div class="mt-2">
+              <span id="detail-category" class="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-bold">Kategori: ATK</span>
+            </div>
+          </div>
+
+          <div class="text-4xl font-black text-brand-orange" id="detail-price">
+            Rp 7.000
+          </div>
+
+          <div class="flex items-center space-x-3">
+            <span id="detail-badge" class="bg-amber-500 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center space-x-1">
+              <span>●</span> <span id="detail-status-text">Menipis</span>
+            </span>
+            <span id="detail-stock-count" class="text-sm font-bold text-slate-800">Jumlah stok: 3 unit</span>
+          </div>
+
+          <!-- Specs -->
+          <div class="space-y-3 pt-2">
+            <h4 class="text-sm font-bold text-slate-900">Spesifikasi & Varian</h4>
+            <ul class="text-xs text-slate-600 space-y-2 list-disc list-inside">
+              <li>Tinta gel hitam 0,5 mm</li>
+              <li>Varian warna: Hitam, Biru, Merah</li>
+              <li>Pegangan karet anti-selip</li>
+              <li>Cocok untuk catatan kuliah dan ujian</li>
+            </ul>
+          </div>
+
+          <!-- Warning Banner -->
+          <div id="detail-warning" class="bg-amber-400 text-slate-900 p-4 rounded-2xl flex items-center space-x-3 border-l-8 border-red-500 shadow-sm">
+            <div class="text-2xl font-black">⚠️</div>
+            <div class="text-xs font-bold">
+              PERINGATAN STOK MENIPIS<br>
+              <span class="font-normal opacity-90">Muncul jika stok kurang dari 5 unit</span>
+            </div>
+          </div>
+
+          <!-- CTA Button -->
+          <div class="pt-2">
+            <a id="detail-wa-btn" href="#" target="_blank" class="w-full py-4 rounded-2xl font-bold bg-brand-green hover:bg-brand-green-hover text-white flex items-center justify-center space-x-2 transition-all shadow-md">
+              <span>Hubungi Penjaga via WhatsApp</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PAGE 4: LOGIN ================= -->
+    <section id="page-login" class="hidden flex justify-center items-center py-8">
+      <div class="w-full max-w-md bg-white rounded-3xl p-8 border border-slate-100 shadow-xl space-y-6">
+        <div class="text-center space-y-1">
+          <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight">LOGIN TIFood</h2>
+          <p class="text-xs text-slate-500">Masuk untuk melanjutkan</p>
+        </div>
+
+        <div class="bg-red-50 border border-red-200 text-red-600 text-xs p-4 rounded-2xl flex items-start space-x-2">
+          <span class="font-bold text-sm">ⓘ</span>
+          <p class="font-medium leading-relaxed">Username atau password salah. Periksa kembali data Anda.</p>
+        </div>
+
+        <form onsubmit="handleLogin(event)" class="space-y-4">
+          <div class="space-y-1.5">
+            <label class="block text-xs font-bold text-slate-800">Masuk sebagai</label>
+            <div class="grid grid-cols-2 gap-3">
+              <label class="flex items-center justify-center space-x-2 p-3 rounded-xl border-2 border-brand-orange bg-orange-50/30 text-brand-orange font-bold text-xs cursor-pointer">
+                <input type="radio" name="role" value="pembeli" checked class="accent-brand-orange">
+                <span>Pembeli</span>
+              </label>
+              <label class="flex items-center justify-center space-x-2 p-3 rounded-xl border border-slate-200 bg-white text-slate-600 font-bold text-xs cursor-pointer hover:bg-slate-50">
+                <input type="radio" name="role" value="admin" class="accent-brand-orange">
+                <span>Admin</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="space-y-1">
+            <label class="block text-xs font-bold text-slate-800">Username</label>
+            <input type="text" value="budi.santoso" required class="w-full px-4 py-3 rounded-xl border border-red-400 text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-red-200">
+          </div>
+
+          <div class="space-y-1">
+            <label class="block text-xs font-bold text-slate-800">Password</label>
+            <div class="relative">
+              <input type="password" value="12345678" required class="w-full px-4 py-3 rounded-xl border border-red-400 text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-red-200">
+              <button type="button" class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm">👁️</button>
+            </div>
+          </div>
+
+          <button type="submit" class="w-full py-3.5 rounded-xl font-bold text-white bg-brand-orange hover:bg-brand-orange-hover transition-all shadow-md uppercase text-xs tracking-wider">
+            MASUK
+          </button>
+        </form>
+
+        <div class="text-center text-xs text-slate-500 font-medium">
+          Belum punya akun? <button onclick="navigateTo('daftar')" class="font-bold text-brand-orange hover:underline">Daftar Akun Pembeli</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PAGE 5: DAFTAR ================= -->
+    <section id="page-daftar" class="hidden flex justify-center items-center py-8">
+      <div class="w-full max-w-lg bg-white rounded-3xl p-8 border border-slate-100 shadow-xl space-y-6">
+        <div class="text-center space-y-1">
+          <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight">Daftar Akun Pembeli</h2>
+          <p class="text-xs text-slate-500">Lengkapi data diri Anda</p>
+        </div>
+
+        <form onsubmit="handleDaftar(event)" class="space-y-4">
+          <div class="space-y-1">
+            <label class="block text-xs font-bold text-slate-800">Nama Lengkap</label>
+            <input type="text" value="Budi Santoso" required class="w-full px-4 py-3 rounded-xl border border-emerald-400 text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-200">
+          </div>
+
+          <div class="space-y-1">
+            <label class="block text-xs font-bold text-slate-800">Role</label>
+            <select class="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-800 text-sm focus:outline-none">
+              <option>Mahasiswa</option>
+              <option>Dosen</option>
+              <option>Tendik</option>
+            </select>
+          </div>
+
+          <div class="space-y-1">
+            <label class="block text-xs font-bold text-slate-800">NIM / NIP</label>
+            <input type="text" placeholder="Contoh: E2231710001" required class="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-800 text-sm">
+          </div>
+
+          <div class="space-y-1">
+            <label class="block text-xs font-bold text-slate-800">Email Kampus</label>
+            <input type="email" value="budi.santoso@gmail.com" required class="w-full px-4 py-3 rounded-xl border border-red-400 text-slate-800 text-sm">
+          </div>
+
+          <div class="space-y-1">
+            <label class="block text-xs font-bold text-slate-800">Password</label>
+            <input type="password" value="******" required class="w-full px-4 py-3 rounded-xl border border-red-400 text-slate-800 text-sm">
+          </div>
+
+          <button type="submit" class="w-full py-3.5 rounded-xl font-bold text-white bg-brand-orange hover:bg-brand-orange-hover transition-all shadow-md uppercase text-xs">
+            DAFTAR
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ================= PAGE 6: DASHBOARD ADMIN ================= -->
+    <section id="page-admin" class="hidden">
+      <div class="bg-white rounded-3xl border border-slate-200/80 shadow-xl overflow-hidden min-h-[680px] flex flex-col md:flex-row">
+        
+        <!-- SIDEBAR ADMIN -->
+        <aside class="w-full md:w-64 bg-brand-dark text-slate-300 p-6 flex flex-col justify-between shrink-0">
+          <div class="space-y-8">
+            <div class="flex items-center space-x-3 text-white">
+              <div class="w-9 h-9 rounded-full bg-brand-orange text-white flex items-center justify-center font-bold text-lg">
+                T
+              </div>
+              <span class="text-xl font-extrabold tracking-tight">TIFood</span>
+            </div>
+
+            <nav class="space-y-2">
+              <button onclick="switchAdminTab('kelola')" id="admin-tab-btn-kelola" class="w-full flex items-center space-x-3 px-4 py-3 rounded-2xl font-bold text-xs bg-brand-orange text-white transition-all shadow-md">
+                <span>📦</span>
+                <span>Kelola Produk</span>
+              </button>
+              
+              <button onclick="switchAdminTab('kasir')" id="admin-tab-btn-kasir" class="w-full flex items-center space-x-3 px-4 py-3 rounded-2xl font-semibold text-xs text-slate-400 hover:text-white hover:bg-slate-800 transition-all">
+                <span>🛒</span>
+                <span>Kasir / Transaksi</span>
+              </button>
+
+              <button onclick="switchAdminTab('riwayat')" id="admin-tab-btn-riwayat" class="w-full flex items-center space-x-3 px-4 py-3 rounded-2xl font-semibold text-xs text-slate-400 hover:text-white hover:bg-slate-800 transition-all">
+                <span>📋</span>
+                <span>Riwayat Transaksi</span>
+              </button>
+
+              <button onclick="switchAdminTab('pengaturan')" id="admin-tab-btn-pengaturan" class="w-full flex items-center space-x-3 px-4 py-3 rounded-2xl font-semibold text-xs text-slate-400 hover:text-white hover:bg-slate-800 transition-all">
+                <span>⚙️</span>
+                <span>Pengaturan</span>
+              </button>
+            </nav>
+          </div>
+
+          <div class="pt-6 border-t border-slate-700/60">
+            <button onclick="navigateTo('login')" class="flex items-center space-x-2 text-xs font-semibold text-slate-400 hover:text-red-400 transition-colors">
+              <span>↩</span>
+              <span>Logout</span>
+            </button>
+          </div>
+        </aside>
+
+        <!-- MAIN DASHBOARD CONTENT AREA -->
+        <main class="flex-grow bg-slate-50/50 p-6 sm:p-8 space-y-6 overflow-x-auto">
+          
+          <!-- TAB 1: KELOLA PRODUK -->
+          <div id="admin-tab-kelola" class="space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div>
+                <h1 class="text-2xl font-extrabold text-slate-900">Dashboard Admin</h1>
+                <p class="text-xs text-slate-500">Kelola stok dan harga produk booth kampus</p>
+              </div>
+              <div class="flex items-center space-x-3">
+                <button onclick="bukaModalTambah()" class="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-brand-orange hover:bg-brand-orange-hover transition-all shadow-sm flex items-center space-x-1">
+                  <span>+ Tambah Produk</span>
+                </button>
+                <button onclick="simpanSemuaPerubahan()" class="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-brand-green hover:bg-brand-green-hover transition-all shadow-sm">
+                  Simpan Perubahan
+                </button>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div class="bg-white p-5 rounded-2xl border border-slate-200/60 shadow-sm flex items-center space-x-4">
+                <div class="w-12 h-12 rounded-xl bg-amber-50 flex items-center justify-center text-2xl">📦</div>
+                <div>
+                  <div class="text-2xl font-black text-slate-900" id="stat-total">48</div>
+                  <div class="text-xs font-bold text-slate-400">Total Produk</div>
+                </div>
+              </div>
+
+              <div class="bg-white p-5 rounded-2xl border border-slate-200/60 shadow-sm flex items-center space-x-4">
+                <div class="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center text-2xl">⚠️</div>
+                <div>
+                  <div class="text-2xl font-black text-slate-900" id="stat-menipis">6</div>
+                  <div class="text-xs font-bold text-slate-400">Stok Menipis</div>
+                </div>
+              </div>
+
+              <div class="bg-white p-5 rounded-2xl border border-slate-200/60 shadow-sm flex items-center space-x-4">
+                <div class="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center text-2xl">🚫</div>
+                <div>
+                  <div class="text-2xl font-black text-slate-900" id="stat-habis">3</div>
+                  <div class="text-xs font-bold text-slate-400">Produk Habis</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-200/60 shadow-sm overflow-hidden">
+              <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                  <thead>
+                    <tr class="bg-brand-dark text-white text-xs font-bold uppercase tracking-wider">
+                      <th class="py-4 px-4 w-12 text-center">No</th>
+                      <th class="py-4 px-4">Gambar</th>
+                      <th class="py-4 px-4">Nama Produk</th>
+                      <th class="py-4 px-4">Harga (Rp)</th>
+                      <th class="py-4 px-4">Stok</th>
+                      <th class="py-4 px-4">Status</th>
+                      <th class="py-4 px-4 text-center">Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody id="admin-table-body" class="divide-y divide-slate-100 text-xs">
+                    <!-- Rendered by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 2: KASIR & HITUNG KEMBALIAN (DILENGKAPI TOMBOL HAPUS) -->
+          <div id="admin-tab-kasir" class="hidden space-y-6">
+            <div>
+              <h1 class="text-2xl font-extrabold text-slate-900">Kasir / Olah Transaksi</h1>
+              <p class="text-xs text-slate-500">Hitung total belanja, pembayaran tunai, dan kembalian secara otomatis</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+              <!-- Item Selection List -->
+              <div class="lg:col-span-7 bg-white p-6 rounded-2xl border border-slate-200/60 shadow-sm space-y-4">
+                <h3 class="font-bold text-slate-900 text-sm">Pilih Barang Pembeli</h3>
+                <div id="kasir-item-list" class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[420px] overflow-y-auto pr-1">
+                  <!-- Rendered dynamically -->
+                </div>
+              </div>
+
+              <!-- Cart & Calculator (Dengan Tombol Hapus ✕) -->
+              <div class="lg:col-span-5 bg-white p-6 rounded-2xl border border-slate-200/60 shadow-sm space-y-4">
+                <div class="flex justify-between items-center border-b pb-2">
+                  <h3 class="font-bold text-slate-900 text-sm">Ringkasan Pembelian</h3>
+                  <button onclick="kosongkanKasir()" class="text-[11px] font-semibold text-red-500 hover:underline">Hapus Semua</button>
+                </div>
+                
+                <div id="kasir-cart-items" class="space-y-2.5 min-h-[120px] max-h-[220px] overflow-y-auto text-xs pr-1">
+                  <!-- Rendered dynamically dengan Tombol Hapus ✕ -->
+                </div>
+
+                <div class="pt-3 border-t space-y-3 text-xs font-bold">
+                  <div class="flex justify-between text-slate-600">
+                    <span>Total Belanja:</span>
+                    <span id="kasir-total-val" class="text-base text-slate-900 font-extrabold">Rp 0</span>
+                  </div>
+
+                  <div class="space-y-1">
+                    <label class="block text-slate-700">Jumlah Uang Dibayar (Rp)</label>
+                    <input type="number" id="kasir-bayar-input" oninput="hitungKembalian()" placeholder="Contoh: 20000" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-slate-900 text-sm focus:ring-2 focus:ring-brand-orange/20 focus:border-brand-orange">
+                  </div>
+
+                  <div class="p-4 rounded-xl bg-orange-50 border border-orange-200 flex justify-between items-center">
+                    <span class="text-slate-800">Uang Kembalian:</span>
+                    <span id="kasir-kembalian-val" class="text-xl font-black text-brand-orange">Rp 0</span>
+                  </div>
+
+                  <button onclick="prosesSelesaiTransaksi()" class="w-full py-3.5 rounded-xl bg-brand-green hover:bg-brand-green-hover text-white font-bold transition-all shadow-md uppercase">
+                    SELESAIKAN TRANSAKSI & CETAK
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 3: RIWAYAT TRANSAKSI -->
+          <div id="admin-tab-riwayat" class="hidden space-y-6">
+            <div>
+              <h1 class="text-2xl font-extrabold text-slate-900">Riwayat Transaksi Booth</h1>
+              <p class="text-xs text-slate-500">Catatan akumulasi pembelian kasir real-time</p>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-slate-200/60 shadow-sm overflow-hidden">
+              <table class="w-full text-left border-collapse text-xs">
+                <thead>
+                  <tr class="bg-brand-dark text-white uppercase font-bold">
+                    <th class="p-4">ID Transaksi</th>
+                    <th class="p-4">Waktu</th>
+                    <th class="p-4">Barang Dibeli</th>
+                    <th class="p-4">Total</th>
+                    <th class="p-4">Bayar</th>
+                    <th class="p-4">Kembalian</th>
+                  </tr>
+                </thead>
+                <tbody id="riwayat-table-body" class="divide-y divide-slate-100">
+                  <!-- Rendered dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- TAB 4: PENGATURAN -->
+          <div id="admin-tab-pengaturan" class="hidden space-y-6 max-w-2xl">
+            <div>
+              <h1 class="text-2xl font-extrabold text-slate-900">Pengaturan Booth & Toko</h1>
+              <p class="text-xs text-slate-500">Atur jam operasional, status buka/tutup, dan kontak penjaga</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl border border-slate-200/60 shadow-sm space-y-5 text-xs font-bold">
+              <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between">
+                <div>
+                  <div class="text-slate-900 font-extrabold text-sm">Status Booth Saat Ini</div>
+                  <div class="text-slate-500 font-normal">Mengubah badge status di halaman utama pembeli</div>
+                </div>
+                <button onclick="toggleBoothStatus()" id="admin-status-toggle" class="px-5 py-2.5 rounded-xl font-bold text-white bg-emerald-500 hover:bg-emerald-600 transition-all shadow-sm">
+                  BUKA
+                </button>
+              </div>
+
+              <div class="space-y-1 font-normal">
+                <label class="block text-slate-800 font-bold">Jam Operasional Booth</label>
+                <input type="text" id="setting-jam" value="08.00–16.00" class="w-full px-4 py-2.5 rounded-xl border border-slate-200">
+              </div>
+
+              <div class="space-y-1 font-normal">
+                <label class="block text-slate-800 font-bold">Nomor WhatsApp Penjaga</label>
+                <input type="text" id="setting-wa" value="628123456789" class="w-full px-4 py-2.5 rounded-xl border border-slate-200">
+              </div>
+
+              <button onclick="simpanPengaturan()" class="px-6 py-3 rounded-xl bg-brand-orange hover:bg-brand-orange-hover text-white font-bold transition-all shadow-md">
+                Simpan Pengaturan
+              </button>
+            </div>
+          </div>
+
+        </main>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL TAMBAH PRODUK -->
+  <div id="modal-tambah" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-6 w-full max-w-md space-y-4 shadow-2xl border border-slate-100">
+      <h3 class="text-lg font-extrabold text-slate-900">Tambah Produk Baru</h3>
+      
+      <form onsubmit="tambahProdukBaru(event)" class="space-y-3 text-xs font-semibold">
+        <div>
+          <label class="block mb-1 text-slate-700">Nama Produk</label>
+          <input type="text" id="new-name" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-slate-800">
+        </div>
+        
+        <div>
+          <label class="block mb-1 text-slate-700">Kategori</label>
+          <select id="new-category" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-slate-800">
+            <option>Makanan</option>
+            <option>Minuman</option>
+            <option>ATK</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block mb-1 text-slate-700">Harga (Rp)</label>
+          <input type="number" id="new-price" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-slate-800">
+        </div>
+
+        <div>
+          <label class="block mb-1 text-slate-700">Jumlah Stok</label>
+          <input type="number" id="new-stock" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-slate-800">
+        </div>
+
+        <div>
+          <label class="block mb-1 text-slate-700">Pilih Icon Emoji</label>
+          <select id="new-emoji" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-slate-800">
+            <option value="🍜">🍜 Makanan</option>
+            <option value="🧃">🧃 Minuman</option>
+            <option value="✏️">✏️ ATK</option>
+            <option value="🍞">🍞 Roti</option>
+            <option value="🍟">🍟 Kentang</option>
+            <option value="🥛">🥛 Susu / Cokelat</option>
+            <option value="📏">📏 Penggaris</option>
+          </select>
+        </div>
+
+        <div class="flex items-center space-x-2 pt-2">
+          <button type="button" onclick="tutupModalTambah()" class="w-1/2 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold">
+            Batal
+          </button>
+          <button type="submit" class="w-1/2 py-2.5 rounded-xl bg-brand-orange hover:bg-brand-orange-hover text-white font-bold">
+            Simpan
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    let products = [
+      { id: 1, name: "Mi Instan Goreng", category: "Makanan", price: 3500, stock: 12, emoji: "🍜" },
+      { id: 2, name: "Pulpen Gel Hitam", category: "ATK", price: 7000, stock: 3, emoji: "🖊️" },
+      { id: 3, name: "Es Teh Manis", category: "Minuman", price: 5000, stock: 50, emoji: "🧃" },
+      { id: 4, name: "Buku Tulis A5", category: "ATK", price: 6500, stock: 0, emoji: "📓" },
+      { id: 5, name: "Roti Cokelat", category: "Makanan", price: 8000, stock: 15, emoji: "🍞" },
+      { id: 6, name: "Kentang Goreng", category: "Makanan", price: 10000, stock: 4, emoji: "🍟" },
+      { id: 7, name: "Es Cokelat", category: "Minuman", price: 7000, stock: 25, emoji: "🥛" },
+      { id: 8, name: "Penggaris 30 cm", category: "ATK", price: 5500, stock: 0, emoji: "📏" }
+    ];
+
+    let currentCategory = "Semua";
+    let isBoothOpen = true;
+    let selectedCart = [
+      { id: 1, name: "Mi Instan Goreng", category: "Makanan", price: 3500, stock: 12, emoji: "🍜", qty: 1 },
+      { id: 3, name: "Es Teh Manis", category: "Minuman", price: 5000, stock: 50, emoji: "🧃", qty: 1 }
+    ];
+    let riwayatTransaksi = [
+      { id: 'TRX-901', waktu: '10:15:20', item: 'Mi Instan Goreng (x2)', total: 7000, bayar: 10000, kembalian: 3000 },
+      { id: 'TRX-902', waktu: '11:40:05', item: 'Es Teh Manis (x1)', total: 5000, bayar: 5000, kembalian: 0 }
+    ];
+
+    function navigateTo(pageId) {
+      const pages = ['beranda', 'katalog', 'detail', 'login', 'daftar', 'admin'];
+      pages.forEach(p => {
+        document.getElementById(`page-${p}`).classList.add('hidden');
+      });
+
+      document.getElementById(`page-${pageId}`).classList.remove('hidden');
+
+      const navButtons = ['beranda', 'katalog', 'login'];
+      navButtons.forEach(nav => {
+        const btn = document.getElementById(`nav-${nav}`);
+        if(btn) {
+          if(nav === pageId) {
+            btn.className = "px-5 py-2 rounded-full text-sm font-semibold transition-all shadow-sm bg-brand-orange/10 text-brand-orange";
+          } else {
+            btn.className = "px-5 py-2 rounded-full text-sm font-medium text-slate-600 hover:text-slate-900 transition-all";
+          }
+        }
+      });
+
+      if(pageId === 'katalog') {
+        renderKatalog();
+      } else if(pageId === 'admin') {
+        renderAdminTable();
+        renderKasirItems();
+        renderCartKasir();
+        renderRiwayatTable();
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function setCategoryFilter(cat) {
+      currentCategory = cat;
+      document.getElementById('kategori-select').value = cat;
+
+      const pills = ['Semua', 'Makanan', 'Minuman', 'ATK'];
+      pills.forEach(p => {
+        const btn = document.getElementById(`pill-${p}`);
+        if(p === cat) {
+          btn.className = "px-5 py-2 rounded-xl text-xs font-bold transition-all bg-brand-orange text-white shadow-sm";
+        } else {
+          btn.className = "px-5 py-2 rounded-xl text-xs font-bold bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition-all";
+        }
+      });
+
+      renderKatalog();
+    }
+
+    function renderKatalog() {
+      const searchVal = document.getElementById('search-input').value.toLowerCase();
+      const sortVal = document.getElementById('sort-select').value;
+      const selectCat = document.getElementById('kategori-select').value;
+
+      if(selectCat !== currentCategory) {
+        currentCategory = selectCat;
+      }
+
+      let filtered = products.filter(p => {
+        const matchesSearch = p.name.toLowerCase().includes(searchVal);
+        const matchesCat = currentCategory === 'Semua' || p.category === currentCategory;
+        return matchesSearch && matchesCat;
+      });
+
+      if(sortVal === 'low-high') {
+        filtered.sort((a,b) => a.price - b.price);
+      } else {
+        filtered.sort((a,b) => b.price - a.price);
+      }
+
+      const grid = document.getElementById('product-grid');
+      const emptyState = document.getElementById('empty-state');
+
+      if(filtered.length === 0) {
+        grid.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+      grid.innerHTML = filtered.map(p => {
+        let statusBadge = '';
+        if(p.stock > 5) {
+          statusBadge = `<span class="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-xs font-bold flex items-center space-x-1"><span>●</span> <span>Tersedia</span></span>`;
+        } else if(p.stock > 0) {
+          statusBadge = `<span class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-xs font-bold flex items-center space-x-1"><span>●</span> <span>Menipis</span></span>`;
+        } else {
+          statusBadge = `<span class="bg-red-100 text-red-600 px-3 py-1 rounded-full text-xs font-bold flex items-center space-x-1"><span>●</span> <span>Habis</span></span>`;
+        }
+
+        return `
+          <div class="bg-white rounded-3xl p-5 border border-slate-100 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+            <div class="space-y-4">
+              <div class="w-full h-44 rounded-2xl bg-amber-50/40 flex items-center justify-center text-7xl">
+                ${p.emoji}
+              </div>
+              
+              <div>
+                <h4 class="font-bold text-slate-900 text-sm sm:text-base">${p.name}</h4>
+                <div class="text-lg font-black text-brand-orange mt-1">Rp ${p.price.toLocaleString('id-ID')}</div>
+              </div>
+
+              <div>${statusBadge}</div>
+            </div>
+
+            <div class="pt-4">
+              <button onclick="bukaDetail(${p.id})" class="w-full py-2.5 rounded-xl font-bold text-xs text-white bg-brand-orange hover:bg-brand-orange-hover transition-all shadow-sm">
+                Lihat Detail
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function bukaDetail(id) {
+      const p = products.find(x => x.id === id);
+      if(!p) return;
+
+      document.getElementById('detail-emoji').innerText = p.emoji;
+      document.getElementById('detail-title').innerText = p.name;
+      document.getElementById('detail-category').innerText = `Kategori: ${p.category}`;
+      document.getElementById('detail-price').innerText = `Rp ${p.price.toLocaleString('id-ID')}`;
+      document.getElementById('detail-stock-count').innerText = `Jumlah stok: ${p.stock} unit`;
+
+      const badge = document.getElementById('detail-badge');
+      const warning = document.getElementById('detail-warning');
+      const statusText = document.getElementById('detail-status-text');
+
+      if(p.stock > 5) {
+        badge.className = "bg-emerald-500 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center space-x-1";
+        statusText.innerText = "Tersedia";
+        warning.classList.add('hidden');
+      } else if(p.stock > 0) {
+        badge.className = "bg-amber-500 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center space-x-1";
+        statusText.innerText = "Menipis";
+        warning.classList.remove('hidden');
+      } else {
+        badge.className = "bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center space-x-1";
+        statusText.innerText = "Habis";
+        warning.classList.remove('hidden');
+      }
+
+      document.getElementById('detail-wa-btn').href = `https://wa.me/628123456789?text=Halo,%20saya%20mau%20pesan%20${encodeURIComponent(p.name)}`;
+
+      navigateTo('detail');
+    }
+
+    function switchAdminTab(tabName) {
+      const tabs = ['kelola', 'kasir', 'riwayat', 'pengaturan'];
+      tabs.forEach(t => {
+        document.getElementById(`admin-tab-${t}`).classList.add('hidden');
+        const btn = document.getElementById(`admin-tab-btn-${t}`);
+        if(btn) {
+          btn.className = "w-full flex items-center space-x-3 px-4 py-3 rounded-2xl font-semibold text-xs text-slate-400 hover:text-white hover:bg-slate-800 transition-all";
+        }
+      });
+
+      document.getElementById(`admin-tab-${tabName}`).classList.remove('hidden');
+      const activeBtn = document.getElementById(`admin-tab-btn-${tabName}`);
+      if(activeBtn) {
+        activeBtn.className = "w-full flex items-center space-x-3 px-4 py-3 rounded-2xl font-bold text-xs bg-brand-orange text-white transition-all shadow-md";
+      }
+    }
+
+    function renderAdminTable() {
+      const tbody = document.getElementById('admin-table-body');
+      let menipisCount = 0;
+      let habisCount = 0;
+
+      tbody.innerHTML = products.map((p, index) => {
+        if(p.stock === 0) habisCount++;
+        else if(p.stock < 5) menipisCount++;
+
+        let badge = '';
+        let stockInputStyle = 'border-slate-200';
+
+        if(p.stock > 5) {
+          badge = `<span class="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-[11px] font-bold">● Tersedia</span>`;
+        } else if(p.stock > 0) {
+          badge = `<span class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-[11px] font-bold">● Menipis</span>`;
+          stockInputStyle = 'border-amber-400 text-amber-700 font-bold';
+        } else {
+          badge = `<span class="bg-red-100 text-red-600 px-3 py-1 rounded-full text-[11px] font-bold">● Habis</span>`;
+          stockInputStyle = 'border-red-400 text-red-600 font-bold';
+        }
+
+        return `
+          <tr class="hover:bg-slate-50/80 transition-colors">
+            <td class="py-3 px-4 text-center font-medium text-slate-500">${index + 1}</td>
+            <td class="py-3 px-4 text-xl">${p.emoji}</td>
+            <td class="py-3 px-4 font-bold text-slate-900">${p.name}</td>
+            <td class="py-3 px-4">
+              <input type="number" value="${p.price}" onchange="updateHarga(${p.id}, this.value)" class="w-24 px-3 py-1.5 rounded-xl border border-slate-200 text-slate-800 focus:ring-2 focus:ring-brand-orange/20">
+            </td>
+            <td class="py-3 px-4">
+              <input type="number" value="${p.stock}" onchange="updateStok(${p.id}, this.value)" class="w-16 px-3 py-1.5 rounded-xl border ${stockInputStyle} text-center focus:ring-2 focus:ring-brand-orange/20">
+            </td>
+            <td class="py-3 px-4">${badge}</td>
+            <td class="py-3 px-4 text-center">
+              <button onclick="hapusProduk(${p.id})" class="p-2 rounded-xl text-red-400 hover:text-red-600 hover:bg-red-50 transition-all">
+                🗑️
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      document.getElementById('stat-total').innerText = products.length;
+      document.getElementById('stat-menipis').innerText = menipisCount;
+      document.getElementById('stat-habis').innerText = habisCount;
+    }
+
+    function updateHarga(id, val) {
+      const p = products.find(x => x.id === id);
+      if(p) p.price = parseInt(val) || 0;
+    }
+
+    function updateStok(id, val) {
+      const p = products.find(x => x.id === id);
+      if(p) {
+        p.stock = parseInt(val) || 0;
+        renderAdminTable();
+      }
+    }
+
+    function hapusProduk(id) {
+      if(confirm('Yakin mau menghapus produk ini?')) {
+        products = products.filter(x => x.id !== id);
+        renderAdminTable();
+      }
+    }
+
+    function simpanSemuaPerubahan() {
+      alert('Perubahan harga dan stok produk berhasil disimpan!');
+    }
+
+    function bukaModalTambah() {
+      document.getElementById('modal-tambah').classList.remove('hidden');
+    }
+
+    function tutupModalTambah() {
+      document.getElementById('modal-tambah').classList.add('hidden');
+    }
+
+    function tambahProdukBaru(e) {
+      e.preventDefault();
+      const newP = {
+        id: Date.now(),
+        name: document.getElementById('new-name').value,
+        category: document.getElementById('new-category').value,
+        price: parseInt(document.getElementById('new-price').value),
+        stock: parseInt(document.getElementById('new-stock').value),
+        emoji: document.getElementById('new-emoji').value
+      };
+
+      products.push(newP);
+      tutupModalTambah();
+      renderAdminTable();
+    }
+
+    // Kasir POS Logic (Ditambahkan Tombol Hapus ✕)
+    function renderKasirItems() {
+      const list = document.getElementById('kasir-item-list');
+      list.innerHTML = products.map(p => `
+        <div onclick="tambahKeKasir(${p.id})" class="p-3 bg-slate-50 rounded-2xl border border-slate-200/80 hover:border-brand-orange cursor-pointer transition-all flex items-center space-x-3 hover:shadow-sm">
+          <span class="text-2xl">${p.emoji}</span>
+          <div class="flex-grow">
+            <div class="font-bold text-slate-800 text-xs">${p.name}</div>
+            <div class="text-slate-500 text-[11px]">Rp ${p.price.toLocaleString('id-ID')} (Stok: ${p.stock})</div>
+          </div>
+          <span class="text-brand-orange font-bold text-lg">+</span>
+        </div>
+      `).join('');
+    }
+
+    function tambahKeKasir(id) {
+      const p = products.find(x => x.id === id);
+      if(!p || p.stock <= 0) {
+        alert('Stok produk habis!');
+        return;
+      }
+
+      const existing = selectedCart.find(x => x.id === id);
+      if(existing) {
+        if(existing.qty < p.stock) {
+          existing.qty++;
+        } else {
+          alert('Mencapai batas maksimum stok!');
+        }
+      } else {
+        selectedCart.push({ ...p, qty: 1 });
+      }
+
+      renderCartKasir();
+    }
+
+    function ubahQtyKasir(id, delta) {
+      const item = selectedCart.find(x => x.id === id);
+      if(!item) return;
+
+      const p = products.find(x => x.id === id);
+      
+      item.qty += delta;
+      if(item.qty <= 0) {
+        hapusItemKasir(id);
+        return;
+      } else if(p && item.qty > p.stock) {
+        alert('Stok tidak mencukupi!');
+        item.qty = p.stock;
+      }
+
+      renderCartKasir();
+    }
+
+    function hapusItemKasir(id) {
+      selectedCart = selectedCart.filter(x => x.id !== id);
+      renderCartKasir();
+    }
+
+    function kosongkanKasir() {
+      selectedCart = [];
+      renderCartKasir();
+    }
+
+    function renderCartKasir() {
+      const container = document.getElementById('kasir-cart-items');
+      if(selectedCart.length === 0) {
+        container.innerHTML = `<p class="text-slate-400 italic text-center py-6">Belum ada barang dipilih</p>`;
+        document.getElementById('kasir-total-val').innerText = 'Rp 0';
+        hitungKembalian();
+        return;
+      }
+
+      let grandTotal = 0;
+      container.innerHTML = selectedCart.map(item => {
+        const subtotal = item.price * item.qty;
+        grandTotal += subtotal;
+
+        return `
+          <div class="flex items-center justify-between p-3 rounded-2xl bg-slate-50/90 border border-slate-100 shadow-sm">
+            <div class="flex-grow pr-2">
+              <div class="font-bold text-slate-800 text-xs">${item.name}</div>
+              <div class="text-slate-400 text-[11px]">Rp ${item.price.toLocaleString('id-ID')} x ${item.qty}</div>
+            </div>
+
+            <div class="flex items-center space-x-3">
+              <!-- Plus Minus Qty Buttons -->
+              <div class="flex items-center bg-white rounded-lg border border-slate-200 px-1">
+                <button onclick="ubahQtyKasir(${item.id}, -1)" class="px-1.5 py-0.5 text-slate-500 hover:text-red-500 font-bold text-xs">-</button>
+                <span class="px-1.5 text-xs font-bold text-slate-700">${item.qty}</span>
+                <button onclick="ubahQtyKasir(${item.id}, 1)" class="px-1.5 py-0.5 text-slate-500 hover:text-emerald-500 font-bold text-xs">+</button>
+              </div>
+
+              <!-- Subtotal Price -->
+              <div class="font-extrabold text-slate-900 text-xs min-w-[65px] text-right">Rp ${subtotal.toLocaleString('id-ID')}</div>
+
+              <!-- Tombol Hapus ✕ -->
+              <button onclick="hapusItemKasir(${item.id})" title="Hapus Barang" class="w-6 h-6 rounded-full bg-red-100 text-red-500 hover:bg-red-500 hover:text-white flex items-center justify-center font-bold text-xs transition-colors">
+                ✕
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById('kasir-total-val').innerText = `Rp ${grandTotal.toLocaleString('id-ID')}`;
+      hitungKembalian();
+    }
+
+    function hitungKembalian() {
+      let total = selectedCart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+      let bayarInput = document.getElementById('kasir-bayar-input').value;
+      let bayar = parseInt(bayarInput) || 0;
+
+      const kembalianElem = document.getElementById('kasir-kembalian-val');
+
+      if(bayarInput === '') {
+        kembalianElem.innerText = 'Rp 0';
+        kembalianElem.className = 'text-xl font-black text-brand-orange';
+        return;
+      }
+
+      let kembalian = bayar - total;
+
+      if(kembalian < 0) {
+        kembalianElem.innerText = 'Kurang Rp ' + Math.abs(kembalian).toLocaleString('id-ID');
+        kembalianElem.className = 'text-xl font-black text-red-500';
+      } else {
+        kembalianElem.innerText = 'Rp ' + kembalian.toLocaleString('id-ID');
+        kembalianElem.className = 'text-xl font-black text-brand-orange';
+      }
+    }
+
+    function prosesSelesaiTransaksi() {
+      let total = selectedCart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+      let bayar = parseInt(document.getElementById('kasir-bayar-input').value) || 0;
+
+      if(selectedCart.length === 0) {
+        alert('Pilih minimal 1 barang!');
+        return;
+      }
+
+      if(bayar < total) {
+        alert('Uang pembayaran masih kurang!');
+        return;
+      }
+
+      selectedCart.forEach(item => {
+        const prod = products.find(x => x.id === item.id);
+        if(prod) prod.stock -= item.qty;
+      });
+
+      const itemText = selectedCart.map(i => `${i.name} (x${i.qty})`).join(', ');
+      const newTrx = {
+        id: 'TRX-' + Math.floor(100 + Math.random() * 900),
+        waktu: new Date().toLocaleTimeString('id-ID'),
+        item: itemText,
+        total: total,
+        bayar: bayar,
+        kembalian: bayar - total
+      };
+
+      riwayatTransaksi.unshift(newTrx);
+      selectedCart = [];
+      document.getElementById('kasir-bayar-input').value = '';
+      
+      renderCartKasir();
+      renderAdminTable();
+      renderKasirItems();
+      renderRiwayatTable();
+
+      alert('Transaksi Berhasil Disimpan!');
+    }
+
+    function renderRiwayatTable() {
+      const tbody = document.getElementById('riwayat-table-body');
+      tbody.innerHTML = riwayatTransaksi.map(t => `
+        <tr class="hover:bg-slate-50">
+          <td class="p-4 font-bold text-slate-800">${t.id}</td>
+          <td class="p-4 text-slate-500">${t.waktu}</td>
+          <td class="p-4 font-medium text-slate-700">${t.item}</td>
+          <td class="p-4 font-bold text-slate-900">Rp ${t.total.toLocaleString('id-ID')}</td>
+          <td class="p-4 text-emerald-600 font-semibold">Rp ${t.bayar.toLocaleString('id-ID')}</td>
+          <td class="p-4 text-brand-orange font-bold">Rp ${t.kembalian.toLocaleString('id-ID')}</td>
+        </tr>
+      `).join('');
+    }
+
+    function toggleBoothStatus() {
+      isBoothOpen = !isBoothOpen;
+      const btn = document.getElementById('admin-status-toggle');
+      const badgeText = document.getElementById('hero-status-text');
+      const badgeDot = document.getElementById('hero-status-dot');
+      const badgeBox = document.getElementById('hero-status-badge');
+
+      if(isBoothOpen) {
+        btn.innerText = "BUKA";
+        btn.className = "px-5 py-2.5 rounded-xl font-bold text-white bg-emerald-500 hover:bg-emerald-600 transition-all shadow-sm";
+        badgeText.innerText = "STATUS: BUKA";
+        badgeBox.className = "inline-flex items-center space-x-2 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider";
+        badgeDot.className = "w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse";
+      } else {
+        btn.innerText = "TUTUP";
+        btn.className = "px-5 py-2.5 rounded-xl font-bold text-white bg-red-500 hover:bg-red-600 transition-all shadow-sm";
+        badgeText.innerText = "STATUS: TUTUP";
+        badgeBox.className = "inline-flex items-center space-x-2 bg-red-500/20 text-red-400 border border-red-500/30 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider";
+        badgeDot.className = "w-2.5 h-2.5 rounded-full bg-red-400";
+      }
+    }
+
+    function simpanPengaturan() {
+      const jam = document.getElementById('setting-jam').value;
+      document.getElementById('hero-operating-hours').innerText = jam;
+      alert('Pengaturan booth berhasil disimpan!');
+    }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const role = document.querySelector('input[name="role"]:checked').value;
+      if(role === 'admin') {
+        navigateTo('admin');
+      } else {
+        navigateTo('beranda');
+      }
+    }
+
+    function handleDaftar(e) {
+      e.preventDefault();
+      alert('Pendaftaran Berhasil! Silakan Login.');
+      navigateTo('login');
+    }
+
+    renderKatalog();
+  </script>
+</body>
+</html>
